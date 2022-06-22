@@ -1,3 +1,8 @@
+leftWristx = 0;
+rightWristx = 0;
+difference = 0;
+
+
 function setup(){
     video = createCapture(VIDEO);
     video.size(550,500);
@@ -9,6 +14,10 @@ function setup(){
 
 function draw(){
     background("#ff0303");
+    textSize(difference);
+    fill("white");
+    text("Lalit kedar", 250, 250);
+    document.getElementById("text_size").innerHTML = "Font Size Of The Text Is = " + difference + "Px";
 }
 
 function modelLoaded(){
@@ -18,5 +27,8 @@ function modelLoaded(){
 function gotPoses(results){
     if(results.length > 0){
         console.log(results);
+        leftWristx = results[0].pose.leftWrist.x;
+        rightWristx = results[0].pose.rightWrist.x;
+        difference = floor(leftWristx - rightWristx);
     }
 }
